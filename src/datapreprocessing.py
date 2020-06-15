@@ -19,6 +19,7 @@ class ChartsDataset(torch.utils.data.Dataset):
         # from the CSV, select the subset for train or val
         df_all = pd.read_csv(csv_fpath)
         self.dataframe = df_all[df_all['id'].isin(set_keys)]
+        self.dataframe = self.dataframe[:1000]
         
         # one hot encoder for the chart type
         self.codec = LabelEncoder()
@@ -33,12 +34,13 @@ class ChartsDataset(torch.utils.data.Dataset):
             idx = idx.tolist()
         
         image = self.read_image(idx)
-        one_hot_chart_type = self.to_one_hot(self.codec, self.dataframe.iloc[idx, 1])                
+        #one_hot_chart_type = self.to_one_hot(self.codec, self.dataframe.iloc[idx, 1])                
         
         if self.transform:
             image = self.transform(image)
-            
-        return (image, one_hot_chart_type)
+        
+        label = self.codec.transform([self.dataframe.iloc[idx, 1]])
+        return (image, label[0])
     
     def read_image(self, idx):
         img_id = self.dataframe.iloc[idx, 0]
@@ -68,7 +70,6 @@ class DataProprocessing():
         np.random.seed(seed)
         
         data_df = pd.read_csv(self.csv_path)
-        data_df = data_df[:10000]
         labels_dict = data_df.set_index('id').T.to_dict('list')
         
         X = list(labels_dict.keys())
@@ -78,18 +79,21 @@ class DataProprocessing():
         
         return train_keys, val_keys
     
-    def get_train_dataset(self):        
-        return self._get_dataset(self.train_keys)
+    def get_train_dataset(self, normalized=True):        
+        return self._get_dataset(self.train_keys, normalized=normalized)
     
-    def get_val_dataset(self):        
-        return self._get_dataset(self.val_keys)
+    def get_val_dataset(self, normalized=True):        
+        return self._get_dataset(self.val_keys, normalized=normalized)
 
-    def _get_dataset(self, keys):
-        transform = transforms.Compose([
+    def _get_dataset(self, keys, normalized=True):
+        transform_list = [
             transforms.ToPILImage(),
             transforms.Resize((224, 224)),
             transforms.ToTensor(),
-            transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
-        ])
+        ]
+        
+        if normalized:
+            transform_list.append(transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]))
+            
+        transform = transforms.Compose(transform_list)
         return ChartsDataset(self.train_img_dir, self.csv_path, keys, transform=transform)
-
