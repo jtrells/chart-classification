@@ -1,3 +1,5 @@
+# TODO: Pass the classes as a parameter
+
 from __future__ import print_function
 from sklearn.model_selection import train_test_split
 from torchvision import transforms

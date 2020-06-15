@@ -49,6 +49,9 @@ def main():
     
     args = parser.parse_args()
     
+    classes = ['Donut', 'Grouped horizontal bar', 'Grouped vertical bar',
+               'Horizontal box', 'Line', 'Pie', 'Scatter',
+               'Stacked horizontal bar', 'Stacked vertical bar', 'Vertical box']
     provider = DataProprocessing(args.dataset_path, None, args.labels_path, seed=args.seed)
     
     model = models.resnet50(pretrained=False)

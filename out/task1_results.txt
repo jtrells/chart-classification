@@ -1,0 +1,34 @@
+Recall for class pie: 1.0
+Precision for class pie: 1.0
+F-Measure for class pie: 1.0
+Recall for class line: 1.0
+Precision for class line: 0.9900990099009901
+F-Measure for class line: 0.9950248756218906
+Recall for class donut: 1.0
+Precision for class donut: 1.0
+F-Measure for class donut: 1.0
+Recall for class grouped horizontal bar: 0.9
+Precision for class grouped horizontal bar: 0.6724137931034483
+F-Measure for class grouped horizontal bar: 0.7697368421052632
+Recall for class grouped vertical bar: 0.9831932773109243
+Precision for class grouped vertical bar: 0.612565445026178
+F-Measure for class grouped vertical bar: 0.7548387096774194
+Recall for class stacked horizontal bar: 0.5403225806451613
+Precision for class stacked horizontal bar: 0.8375
+F-Measure for class stacked horizontal bar: 0.6568627450980392
+Recall for class scatter: 1.0
+Precision for class scatter: 1.0
+F-Measure for class scatter: 1.0
+Recall for class stacked vertical bar: 0.408
+Precision for class stacked vertical bar: 1.0
+F-Measure for class stacked vertical bar: 0.5795454545454546
+Recall for class horizontal box: 1.0
+Precision for class horizontal box: 1.0
+F-Measure for class horizontal box: 1.0
+Recall for class vertical box: 1.0
+Precision for class vertical box: 1.0
+F-Measure for class vertical box: 1.0
+Average Recall across 10 classes: 0.8831515857956085
+Average Precision across 10 classes: 0.9112578248030616
+Average F-Measure across 10 classes: 0.8756008627048066
+Computing Confusion Matrix
